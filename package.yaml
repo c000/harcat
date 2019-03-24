@@ -35,8 +35,11 @@ library:
   source-dirs: src
   dependencies:
   - aeson
+  - base64-bytestring
   - errors
   - microlens-platform
+  - pipes
+  - pipes-bytestring
   - stache
   - text
   - vector

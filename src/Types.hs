@@ -8,6 +8,8 @@ import RIO.Process
 data Options = Options
   { optionsVerbose :: !Bool
   , optionsInputFile :: !FilePath
+  , optionsOutputFile :: !FilePath
+  , optionsCatList :: Maybe FilePath
   , optionsListTemplate :: !Text
   }
 

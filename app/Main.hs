@@ -28,6 +28,18 @@ main = do
                     <> metavar "FILE"
                     <> help "Input har filepath"
                      )
+       <*> strOption ( long "output"
+                    <> short 'o'
+                    <> metavar "FILE"
+                    <> value "-"
+                    <> showDefault
+                    <> help "Output filepath (\"-\" as stdout)"
+                     )
+       <*> option (Just <$> maybeReader Just) ( long "use-list"
+                                             <> short 'L'
+                                             <> value Nothing
+                                             <> help "List file of response indexes (\"-\" as stdin)"
+                                              )
        <*> strOption ( long "template"
                     <> metavar "TEMPLATE"
                     <> value "{{# response.content.encoding }}{{ index }};\t{{{ request.url }}}{{/ response.content.encoding }}"
