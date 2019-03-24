@@ -1,0 +1,26 @@
+box:
+  id: haskell:8.4.4
+  env:
+    CACHE: $WERCKER_CACHE_DIR/cache.tar.gz
+
+build:
+  steps:
+    - script:
+        name: expand cache
+        cwd: /
+        code: |
+          if [ -f $CACHE ]; then
+            echo expanding cache
+            tar zvxf $CACHE
+          fi
+
+    - script:
+        name: build
+        code: |
+          stack build
+
+    - script:
+        name: make cache
+        code: |
+          tar c ~/.stack | gzip --fast > $CACHE
+          ls -lh $WERCKER_CACHE_DIR
