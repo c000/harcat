@@ -5,6 +5,7 @@ module  HarCat.Decode where
 import Import
 import Data.Aeson
 import Data.ByteString.Base64
+import Data.Maybe
 
 import HarCat.Types
 
@@ -20,4 +21,4 @@ entryToBytestring e = case e ^. response . content . encoding of
   Just "base64" -> Right . decodeLenient $ utf8Content
   Just enc -> Left $ "unrecogniszed encoding " <> enc
   where
-    utf8Content = e ^. response . content . text . to encodeUtf8
+    utf8Content = e ^. response . content . text . to fromJust . to encodeUtf8

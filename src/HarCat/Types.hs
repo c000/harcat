@@ -13,7 +13,7 @@ data Content = Content
   { _encoding :: Maybe Text
   , _mimeType :: !Text
   , _size :: !Int
-  , _text :: !Text
+  , _text :: Maybe Text
   } deriving Show
 
 deriveJSON jsonDecodeOptions ''Content
