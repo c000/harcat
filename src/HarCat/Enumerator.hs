@@ -26,7 +26,9 @@ enumeratedEntriesToJSON index entry = case toJSON entry of
   Object obj -> Object $ obj & at "index" .~ (Just $ toJSON index)
   _ -> error "unexpected type at (toJSON entry)"
 
-formatEntries :: ToJSON e => Template -> Vector e -> [LText]
-formatEntries template es = Import.map (renderMustache template) values
+formatEntries :: ToJSON e => Template -> Vector e -> [(LText, e)]
+formatEntries template es = values
   where
-    values = V.toList $ V.imap enumeratedEntriesToJSON es
+    formatted = V.map (renderMustache template) . V.imap enumeratedEntriesToJSON $ es
+    originals = es
+    values = V.toList $ V.zip formatted originals

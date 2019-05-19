@@ -10,6 +10,7 @@ import Pipes
 import qualified Pipes.Prelude as P
 import qualified Data.Text.IO as T
 import qualified Data.Text.Lazy as T
+import Data.Aeson (fromJSON)
 import Data.Text.Lazy.IO
 import Text.Mustache
 
@@ -64,8 +65,10 @@ runListing = runExceptT $ do
   har <- tryRight =<< fmapL displayShow <$> decodeFileRaw inputPath
   let es = har ^. log . entries
   forM_ (formatEntries template es) $ \t -> do
-    unless (T.null t) $ do
-      liftIO $ putStrLn t
+    when (or [ not . T.null $ fst t
+             , not . null $ t ^.. _2 . to fromJSON . folded . response . content . text . _Just
+             ]) $ do
+      liftIO . putStrLn $ fst t
 
 run :: RIO App ()
 run = do
