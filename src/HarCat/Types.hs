@@ -11,7 +11,7 @@ import HarCat.Internal
 
 data Content = Content
   { _encoding :: Maybe Text
-  , _mimeType :: !Text
+  , _mimeType :: Maybe Text
   , _size :: !Int
   , _text :: Maybe Text
   } deriving Show
