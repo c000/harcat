@@ -1,13 +1,13 @@
 {-# LANGUAGE TemplateHaskell #-}
 module HarCat.Types where
 
-import Data.Aeson.TH
-import Data.Text
-import Data.Vector
+import           Data.Aeson.TH
+import           Data.Text
+import           Data.Vector
 
-import Lens.Micro.Platform
+import           Lens.Micro.Platform
 
-import HarCat.Internal
+import           HarCat.Internal
 
 data Content = Content
   { _encoding :: Maybe Text
