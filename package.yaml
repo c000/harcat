@@ -1,10 +1,10 @@
 name:                harcat
-version:             0.1.0.2
+version:             0.1.0.3
 github:              c000/harcat
 license:             BSD3
 author:              c000
 maintainer:          example@example.com
-copyright:           2019 c000
+copyright:           2019-2020 c000
 
 extra-source-files:
 - README.md
